@@ -63,7 +63,9 @@ print(X.shape)
 print(Y.shape)
 
 coeff = data['CRIM'].corr(data['B'])
-print(abs(coeff))
+if coeff < 0 :
+  print("negative Korrelation")
+print(coeff)
 
 if abs(coeff) >= 0.5:
  print("starker Zusammenhang")
