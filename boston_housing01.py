@@ -68,13 +68,13 @@ if coeff < 0 :
 print(coeff)
 
 if abs(coeff) >= 0.5:
- print("starker Zusammenhang")
+  print("starker Zusammenhang")
 if (abs(coeff) >= 0.3) and (abs(coeff) < 0.5):
- print("moderater Zusammenhang")
+  print("moderater Zusammenhang")
 if (abs(coeff) < 0.3) and (abs(coeff) >= 0.1):
   print("schwacher Zusammenhang")
 
-"""Low correlation between B and CRIM"""
+"""Medium correlation between B and CRIM"""
 
 plt.rcParams['font.family'] = 'DeJavu Serif'
 plt.rcParams['font.serif'] = ['Times New Roman']
