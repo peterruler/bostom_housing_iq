@@ -62,6 +62,18 @@ X = data["B"]
 print(X.shape)
 print(Y.shape)
 
+coeff = data['CRIM'].corr(data['B'])
+print(abs(coeff))
+
+if abs(coeff) >= 0.5:
+ print("starker Zusammenhang")
+if (abs(coeff) >= 0.3) and (abs(coeff) < 0.5):
+ print("moderater Zusammenhang")
+if (abs(coeff) < 0.3) and (abs(coeff) >= 0.1):
+  print("schwacher Zusammenhang")
+
+"""Low correlation between B and CRIM"""
+
 plt.rcParams['font.family'] = 'DeJavu Serif'
 plt.rcParams['font.serif'] = ['Times New Roman']
 plt.rc('xtick', labelsize='x-small')
@@ -76,5 +88,3 @@ ax.plot([Y.min(), Y.max()])
 
 ax.set_xlabel('CRIM Predicted Target Value')
 ax.set_ylabel('B Measured Target Value')
-
-"""Low correlation between B and CRIM"""
