@@ -88,5 +88,5 @@ ax = fig.add_subplot(1, 1, 1)
 ax.scatter(X, Y, lw = 0.3)
 ax.plot([Y.min(), Y.max()])
 
-ax.set_xlabel('CRIM Predicted Target Value')
-ax.set_ylabel('B Measured Target Value')
+ax.set_xlabel('CRIM Measured Target Value')
+ax.set_ylabel('B Predicted Target Value')
