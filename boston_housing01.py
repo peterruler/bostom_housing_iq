@@ -21,6 +21,11 @@ drive.mount('/content/drive/', force_remount=True)
 column_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV']
 data = pd.read_csv('/content/drive/My Drive/COURSE-zhaw-dlcourse-spring2019/housing.csv', header=None, delimiter=r"\s+", names=column_names)
 
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+from tensorflow import keras
+(train_data, train_targets), (test_data, test_targets) = keras.datasets.boston_housing.load_data()
+
 print(data.head(5))
 
 # Dimension of the dataset
@@ -90,3 +95,45 @@ ax.plot([Y.min(), Y.max()])
 
 ax.set_xlabel('CRIM Measured Target Value')
 ax.set_ylabel('B Predicted Target Value')
+
+X = pd.DataFrame(train_data)
+Y = pd.DataFrame(train_targets)
+
+X['b'] = 1
+
+cols = X.columns.tolist()
+cols = cols[-1:] + cols[:-1]
+print(cols)
+
+X = X[cols]
+
+X.head()
+
+part1 = np.linalg.inv(np.matmul(X.transpose() , X))
+part2 = np.matmul(X.transpose(), Y)
+
+p = np.matmul(part1, part2)
+
+print(p)
+
+Yhat = np.matmul(X, p)
+
+plt.rcParams['font.family'] = 'DeJavu Serif'
+plt.rcParams['font.serif'] = ['Times New Roman']
+plt.rc('xtick', labelsize='x-small')
+plt.rc('ytick', labelsize='x-small')
+
+plt.tight_layout()
+
+fig = plt.figure(figsize=(8, 5))
+ax = fig.add_subplot(1, 1, 1)
+ax.scatter(Y, Yhat, lw = 0.3)
+ax.plot([Y.min(), Y.max()])# Exercise 7
+
+# From the previous exercise you should get a plot similar to this one
+
+# ![](boston_result.png)
+
+# Answer why there is  set of vertical point at ```"Measured Target Value = 50".```], [Y.min(), Y.max()], 'k--', lw = 3)
+ax.set_xlabel('Measured Target Value')
+ax.set_ylabel('Predicted Target Value')
